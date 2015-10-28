@@ -3,12 +3,15 @@ import urlparse
 
 class Client(object):
     """Wraps a test client for convenience."""
-    def __init__(self, test_client, with_admin=False):
+    def __init__(self, test_client, app, with_admin=False):
         self.client = test_client
         self.with_admin = with_admin
+        self.app = app
 
     def _request(self, uri, fn, with_user=None, with_admin=False, to_json=True,
                  headers={}, data=None, query_string=None):
+
+        headers = dict(headers.items() + {'Authorization-Token':self.app.config.get('AUTHENTICATION_TOKEN')}.items())
         response = fn(uri, follow_redirects=True, query_string=query_string, headers=headers, data=data)
         if to_json:
             try:

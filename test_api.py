@@ -35,7 +35,7 @@ def app(request):
 
 @pytest.fixture(scope='function')
 def client(app):
-    return Client(app.test_client(), with_admin=True)
+    return Client(app.test_client(), app, with_admin=True)
 
 
 """ Begin Testing """
@@ -114,7 +114,9 @@ def test_device_id_setting(app, client):
     headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'DEVICE-ID': '12345678abcdefg'
+        'DEVICE-ID': '12345678abcdefg',
+        'yweoewoi':'ewewkwe',
+        'AUTHORIZATION-TOKEN': 'abc'
     }
     resp = raw_client.post('/api/pitch', data=json.dumps(pitch_data), follow_redirects=True, headers=headers)
     assert resp.status_code == 200
@@ -122,4 +124,45 @@ def test_device_id_setting(app, client):
     p = Pitch.query.first()
     assert p.device_id == '12345678abcdefg'
 
+def test_pitch_view(app, client):
+    from app.models import db, Pitch, Video
+
+    v = Video(url='http://gofuckaduck.com')
+    db.session.add(v)
+
+    pitch_data = {
+        'first_name':'Brian',
+        'last_name':'Anglin',
+        'email':'banglin@usc.edu',
+        'student_org':'Spark',
+        'college': 'Engineering',
+        'grad_year': '2018',
+        'pitch_title': 'My Dope Pitch',
+        'pitch_category': 'Environment',
+        'pitch_short_description': 'Yo this is a dope pitch',
+        'video_url':'http://gofuckaduck.com'
+    }
+
+    client.post('/api/pitch', data=pitch_data)
+
+
+    resp, status_code = client.get('/api/pitch-view')
+    assert status_code == 200
+    assert len(resp['pitches']) == 1
+
+
+    resp, status_code = client.get('/api/pitch-download')
+    assert status_code == 200
+    assert len(resp['pitches']) == 1
+
+
+    # If no query string should be exactly the same
+    resp, status_code = client.get('/api/pitch-view')
+    assert status_code == 200
+    assert len(resp['pitches']) == 1
+
+    # No we'll add a query parameter
+    resp, status_code = client.get('/api/pitch-download', query_string={'filter-dl':'1'})
+    assert status_code == 200
+    assert len(resp['pitches']) == 0
 

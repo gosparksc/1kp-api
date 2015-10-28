@@ -1,4 +1,6 @@
-from flask import request, jsonify, Blueprint, current_app
+import datetime
+
+from flask import request, jsonify, Blueprint, current_app, abort
 from functools import wraps
 from models import Pitch, PitchForm, db
 import utils
@@ -6,22 +8,17 @@ import utils
 def auth_token_required(fn):
     @wraps(fn)
     def decorated(*args, **kwargs):
-        if request.headers.get('AUTH_TOKEN', '') == '':
+        if request.headers.get('Authorization-Token', '') == current_app.config.get('AUTHENTICATION_TOKEN'):
             return fn(*args, **kwargs)
-        return _get_unauthorized_response()
+        return abort(401)
     return decorated
 
 api_blueprint = Blueprint('api_blueprint', __name__)
 
 """
-    /upload
-        - pitch
-    /pitch
-        - first_name, last_name, etc
-        - pitch url
+    Video:
+        POST /upload-video --> Uploads video
 """
-
-
 @api_blueprint.route('/upload-video', methods=['POST', 'GET'])
 @auth_token_required
 def from_video():
@@ -46,19 +43,12 @@ def from_video():
     else:
         return abort(404)
 
-
-
-@api_blueprint.route('/')
-def root():
-    return 'Hello World!'
-
-@api_blueprint.route('/pitch-download', methods=['GET'])
-@auth_token_required
-def pitch_download():
-    pitches = Pitch.query.all()
-    json_pitches = [pitch.to_dict(show_all=True) for pitch in pitches]
-    return jsonify({'pitches': json_pitches})
-
+"""
+    Pitches:
+        POST /pitch  --> Creates Pitch
+        GET /pitch-view --> Grabs pitches
+        GET /pitch-download --> Grabs pitches and marks as downloaded
+"""
 @api_blueprint.route('/pitch', methods=['POST'])
 @auth_token_required
 def pitch():
@@ -81,3 +71,33 @@ def pitch():
 
     return jsonify({'status':'success'})
 
+
+@api_blueprint.route('/pitch-download', methods=['GET'])
+@auth_token_required
+def pitch_download():
+    pitches = Pitch.query.filter(Pitch.downloaded==False).all()
+    json_pitches = [pitch.to_dict(show_all=True) for pitch in pitches]
+
+    if request.headers.getlist("X-Forwarded-For"):
+        user_ip_addr = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        user_ip_addr = request.remote_addr
+
+    for pitch in pitches:
+        pitch.downloaded = True
+        pitch.downloader_ip = user_ip_addr
+        pitch.downloaded_date = datetime.datetime.utcnow()
+        db.session.add(pitch)
+    db.session.commit()
+
+    return jsonify({'pitches': json_pitches})
+
+@api_blueprint.route('/pitch-view', methods=['GET'])
+@auth_token_required
+def pitch_view():
+    pitches = Pitch.query
+    if request.args.get('filter-dl', '') != '':
+        pitches = pitches.filter(Pitches.downloaded==False)
+    pitches = pitches.all()
+    json_pitches = [pitch.to_dict(show_all=True) for pitch in pitches]
+    return jsonify({'pitches': json_pitches})

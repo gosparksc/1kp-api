@@ -6,7 +6,7 @@ app = create_app()
 
 manager = Manager(app)
 
-@manager.command()
+@manager.command
 def setup():
     db.create_all()
 
