@@ -304,17 +304,20 @@ class Pitch(Model):
     downloader_ip = db.Column(db.String)
     downloaded_date = db.Column(db.DateTime)
 
+    # Facebook
+    fb_posted = db.Column(db.Boolean, default=False)
+
 
 class PitchForm(Form):
     first_name = StringField(validators=[Length(max=250), Required()])
     last_name = StringField(validators=[Length(max=250), Required()])
     email = StringField(validators=[Length(max=250), Required()])
     student_org = StringField(validators=[Length(max=250)])
-    college = SelectField(validators=[Required()], choices=[('Letters, Arts and Sciences', 'Letters, Arts and Sciences'), ('Accounting', 'Accounting'), ('Architecture', 'Architecture'), ('Business', 'Business'), ('Arts, Technology, Business', 'Arts, Technology, Business'), ('Cinematic Arts', 'Cinematic Arts'), ('Communication', 'Communication'), ('Dramatic Arts', 'Dramatic Arts'), ('Dentistry', 'Dentistry'), ('Education', 'Education'), ('Engineering', 'Engineering'), ('Fine Arts', 'Fine Arts'), ('Gerontology', 'Gerontology'), ('Law', 'Law'), ('Medicine', 'Medicine'), ('Music', 'Music'), ('Pharmacy', 'Pharmacy'), ('Policy, Planning, and Developement', 'Policy, Planning, and Developement'), ('Social Work', 'Social Work')])
+    college = SelectField(validators=[Required()], choices=[('Letters, Arts and Sciences', 'Letters, Arts and Sciences'), ('Accounting', 'Accounting'), ('Architecture', 'Architecture'), ('Business', 'Business'), ('Arts, Technology, Business', 'Arts, Technology, Business'), ('Cinematic Arts', 'Cinematic Arts'), ('Communication', 'Communication'), ('Dance', 'Dance'), ('Dramatic Arts', 'Dramatic Arts'), ('Dentistry', 'Dentistry'), ('Education', 'Education'), ('Engineering', 'Engineering'), ('Fine Arts', 'Fine Arts'), ('Gerontology', 'Gerontology'), ('Law', 'Law'), ('Medicine', 'Medicine'), ('Music', 'Music'), ('Pharmacy', 'Pharmacy'), ('Policy, Planning, and Developement', 'Policy, Planning, and Developement'), ('Social Work', 'Social Work')])
     grad_year = StringField(validators=[Length(max=4), Required()])
 
     pitch_title = StringField(validators=[Length(max=250), Required()])
-    pitch_category = SelectField(validators=[Required()], choices=[('Music', 'Music'), ('Film', 'Film'), ('Environment', 'Environment'), ('Education', 'Education'), ('Tech & Hardware', 'Tech & Hardware'), ('Web & Software', 'Web & Software'), ('Consumer Products & Small Business', 'Consumer Products & Small Business'), ('Health', 'Health'), ('University Improvements', 'University Improvements'), ('Mobile', 'Mobile'), ('Research', 'Research'), ('Video Games', 'Video Games')])
+    pitch_category = SelectField(validators=[Required()], choices=[('Art & Performance', 'Art & Performance'), ('Media & Entertainment', 'Media & Entertainment'), ('USC Community', 'USC Community'), ('Health & Biotech', 'Health & Biotech'), ('Fintech & Commerce', 'Fintech & Commerce'), ('Education', 'Education'), ('Environment', 'Environment'), ('Social & Lifestyle', 'Social & Lifestyle'), ('Services', 'Services')])
     pitch_short_description = StringField(validators=[Length(max=5000), Required()])
 
     video_url = StringField(validators=[Required()])
