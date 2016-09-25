@@ -14,7 +14,7 @@ def app(request):
     # We add some config overrides specifically for testing. The password
     # hash is changed to plaintext to speed up user creation.
     config_override = {
-        'SQLALCHEMY_DATABASE_URI': 'postgresql://postgres:ponder@localhost/onekptesting'
+        'SQLALCHEMY_DATABASE_URI': 'postgresql://postgres:@0.0.0.0:5000/onekptesting'
     }
     app = create_app(config_override)
 
