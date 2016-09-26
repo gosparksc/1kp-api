@@ -2,8 +2,8 @@ import datetime
 
 from flask import request, jsonify, Blueprint, current_app, abort
 from functools import wraps
-from models import Pitch, PitchForm, db
-import utils
+from app.models import Pitch, PitchForm, db
+import app.utils
 
 def auth_token_required(fn):
     @wraps(fn)

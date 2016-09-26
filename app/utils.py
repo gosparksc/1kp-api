@@ -2,7 +2,7 @@ from flask import current_app
 import uuid
 import boto
 from boto.s3.key import Key
-from models import db
+from app.models import db
 
 def get_bucket():
     conn = boto.connect_s3()
@@ -28,7 +28,7 @@ def store(key, data, bucket=None, type=None):
     return k
 
 def store_video(video):
-    from models import Video
+    from app.models import Video
     key_base = str(uuid.uuid4())
     bucket = get_bucket()
     store(key_base, video, bucket=bucket, type='video/quicktime')
