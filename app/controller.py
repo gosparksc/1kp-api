@@ -24,7 +24,7 @@ api_blueprint = Blueprint('api_blueprint', __name__)
 def from_video():
     if request.method == 'POST':
         file = request.files['file']
-        video_m = utils.store_video(file.stream)
+        video_m = app.utils.store_video(file.stream)
         rv = {
             'status':'success',
             'video_url': video_m.url
