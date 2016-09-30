@@ -32,7 +32,7 @@ def store_video(video):
     key_base = str(uuid.uuid4())
     bucket = get_bucket()
     store(key_base, video, bucket=bucket, type='video/quicktime')
-    url = "http://s3.amazonaws.com/%s/%s" % (current_app.config.get('AWS_BUCKET_NAME'), key_base)
+    url = "http://s3-us-west-1.amazonaws.com/%s/%s" % (current_app.config.get('AWS_BUCKET_NAME'), key_base)
     video_m = Video(
         url=url,
     )

@@ -2,8 +2,10 @@ import datetime
 
 from flask import request, jsonify, Blueprint, current_app, abort
 from functools import wraps
+import requests
 from app.models import Pitch, PitchForm, db
 import app.utils
+
 
 def auth_token_required(fn):
     @wraps(fn)
@@ -68,6 +70,21 @@ def pitch():
     pitch.set_columns(**form.patch_data)
     db.session.add(pitch)
     db.session.commit()
+
+    # crosspost the video to Facebook
+    fb_page_id = current_app.config.get('FB_PAGE_ID')
+    payload = {
+        'access_token':current_app.config.get('FB_ACCESS_TOKEN'),
+        'file_url':pitch.video_url,
+        'description':pitch.pitch_title,
+        'no_story':'true'
+    }
+    # print('Page ID: ' + fb_page_id)
+    # print('Access Token: ' + current_app.config.get('FB_ACCESS_TOKEN'))
+    # print('Video URL ' + pitch.video_url)
+    # print('Description: ' + pitch.pitch_title)
+    r = requests.post('https://graph.facebook.com/v2.7/' + fb_page_id + '/videos', data = payload)
+    print('Results: ' + r.text)
 
     return jsonify({'status':'success'})
 
