@@ -317,7 +317,7 @@ class PitchForm(Form):
     grad_year = StringField(validators=[Length(max=4), Required()])
 
     pitch_title = StringField(validators=[Length(max=250), Required()])
-    pitch_category = SelectField(validators=[Required()], choices=[('Art & Performance', 'Art & Performance'), ('Media & Entertainment', 'Media & Entertainment'), ('USC Community', 'USC Community'), ('Health & Biotech', 'Health & Biotech'), ('Fintech & Commerce', 'Fintech & Commerce'), ('Education', 'Education'), ('Environment', 'Environment'), ('Social & Lifestyle', 'Social & Lifestyle'), ('Services', 'Services'), ('Small Business', 'Small Business')])
+    pitch_category = SelectField(validators=[Required()], choices=[('Art & Interactive Media', 'Art & Interactive Media'), ('Community Impact', 'Community Impact'), ('Education', 'Education'), ('Enterprise & Commerce', 'Enterprise & Commerce'), ('Environment', 'Environment'), ('Health & Biotech', 'Health & Biotech'), ('Household & Everyday Products', 'Household & Everyday Products'), ('Media & Entertainment', 'Media & Entertainment'), ('Services', 'Services'), ('Small Business', 'Small Business'), ('Social & Lifestyle', 'Social & Lifestyle'), ('USC Community', 'USC Community')])
     pitch_short_description = StringField(validators=[Length(max=5000), Required()])
 
     video_url = StringField(validators=[Required()])
