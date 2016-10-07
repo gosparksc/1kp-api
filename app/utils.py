@@ -39,3 +39,12 @@ def store_video(video):
     db.session.add(video_m)
     db.session.commit()
     return video_m
+
+def store_video_url(video_url):
+    from app.models import Video
+    video_m = Video(
+        url=video_url,
+    )
+    db.session.add(video_m)
+    db.session.commit()
+    return video_url
