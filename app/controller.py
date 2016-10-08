@@ -45,6 +45,21 @@ def from_video():
     else:
         return abort(404)
 
+@api_blueprint.route('/video', methods=['POST'])
+@auth_token_required
+def from_video_url():
+    if request.method == 'POST':
+        input_data = request.get_json(force=True)
+        video_m = app.utils.store_video_url(input_data["video_url"])
+        #print(input_data["video_url"])
+        rv = {
+            'status':'success',
+            'video_url': video_m.url
+        }
+        return jsonify(rv)
+    else:
+        return abort(404)
+
 """
     Pitches:
         POST /pitch  --> Creates Pitch

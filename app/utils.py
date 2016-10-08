@@ -47,4 +47,4 @@ def store_video_url(video_url):
     )
     db.session.add(video_m)
     db.session.commit()
-    return video_url
+    return video_m
