@@ -98,7 +98,7 @@ def pitch():
     # print('Access Token: ' + current_app.config.get('FB_ACCESS_TOKEN'))
     # print('Video URL ' + pitch.video_url)
     # print('Description: ' + pitch.pitch_title)
-    #r = requests.post('https://graph.facebook.com/v2.7/' + fb_page_id + '/videos', data = payload)
+    r = requests.post('https://graph.facebook.com/v2.7/' + fb_page_id + '/videos', data = payload)
     print('Results: ' + r.text)
 
     return jsonify({'status':'success'})
