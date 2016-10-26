@@ -60,6 +60,28 @@ def from_video_url():
     else:
         return abort(404)
 
+@api_blueprint.route('/facebook-post', methods=['POST'])
+@auth_token_required
+def to_facebook():
+    if request.method == 'POST':
+        input_data = request.get_json(force=True)
+
+        # crosspost the video to Facebook
+        fb_page_id = current_app.config.get('FB_PAGE_ID')
+        payload = {
+            'access_token':current_app.config.get('FB_ACCESS_TOKEN'),
+            'file_url':input_data["video_url"],
+            'description':input_data["title"],
+            'no_story':'true'
+        }
+        r = requests.post('https://graph.facebook.com/v2.7/' + fb_page_id + '/videos', data = payload)
+        rv = {
+            'status':'success'
+        }
+        return jsonify(rv)
+    else:
+        return abort(404)
+
 """
     Pitches:
         POST /pitch  --> Creates Pitch
