@@ -1,7 +1,7 @@
 1kp API
 ===
 
-API to setup uplaoding of posts.
+API to setup uploading of posts.
 
 
 ###Setup
@@ -11,12 +11,12 @@ API to setup uplaoding of posts.
     pip install -r requirements.txt
     // Start Postgres
     createdb onekp
-    python mananage.py setup
+    python3 manage.py setup
     createdb onekptesting
 
 ###Running
 
-    python wsgi.py
+    python3 wsgi.py
 
 
 ### Accessing The Server

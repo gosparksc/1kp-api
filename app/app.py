@@ -4,8 +4,13 @@ from flask import Flask
 
 def create_app(config_override={}):
     app = Flask(__name__)
+
     from app.controller import api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/api')
+
+    # from app.webcontroller import web_blueprint
+    # app.register_blueprint(web_blueprint)
+
     app.config.from_pyfile('../config.py')
 
     os.environ["AWS_ACCESS_KEY_ID"] = app.config["AWS_ACCESS_KEY_ID"]
@@ -15,5 +20,3 @@ def create_app(config_override={}):
     db.init_app(app)
 
     return app
-
-

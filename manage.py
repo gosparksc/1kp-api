@@ -1,5 +1,5 @@
 from app.app import create_app
-from flask.ext.script import Manager
+from flask_script import Manager
 from app.models import db
 
 app = create_app()
