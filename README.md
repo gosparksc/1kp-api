@@ -16,6 +16,7 @@ API to setup uploading of posts.
 
 ###Running
 
+    source env/bin/activate
     python3 wsgi.py
 
 

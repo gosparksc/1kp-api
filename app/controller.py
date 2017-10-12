@@ -17,6 +17,7 @@ def auth_token_required(fn):
 
 api_blueprint = Blueprint('api_blueprint', __name__)
 
+
 """
     Video:
         POST /upload-video --> Uploads video
@@ -45,6 +46,7 @@ def from_video():
     else:
         return abort(404)
 
+
 @api_blueprint.route('/video', methods=['POST'])
 @auth_token_required
 def from_video_url():
@@ -59,6 +61,7 @@ def from_video_url():
         return jsonify(rv)
     else:
         return abort(404)
+
 
 @api_blueprint.route('/facebook-post', methods=['POST'])
 @auth_token_required
@@ -81,6 +84,7 @@ def to_facebook():
         return jsonify(rv)
     else:
         return abort(404)
+
 
 """
     Pitches:
@@ -149,6 +153,7 @@ def pitch_download():
 
     return jsonify({'pitches': json_pitches})
 
+
 @api_blueprint.route('/pitch-view', methods=['GET'])
 @auth_token_required
 def pitch_view():
@@ -158,3 +163,10 @@ def pitch_view():
     pitches = pitches.all()
     json_pitches = [pitch.to_dict(show_all=True) for pitch in pitches]
     return jsonify({'pitches': json_pitches})
+
+
+@api_blueprint.route('/pitch-count', methods=['GET'])
+@auth_token_required
+def pitch_count():
+    count = Pitch.query.count()
+    return jsonify({'count': count})

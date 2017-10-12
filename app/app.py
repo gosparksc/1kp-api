@@ -8,8 +8,8 @@ def create_app(config_override={}):
     from app.controller import api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/api')
 
-    # from app.webcontroller import web_blueprint
-    # app.register_blueprint(web_blueprint)
+    from app.webcontroller import web_blueprint
+    app.register_blueprint(web_blueprint)
 
     app.config.from_pyfile('../config.py')
 

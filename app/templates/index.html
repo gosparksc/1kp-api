@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}View Pitches{% endblock %}
+{% block meta_description %}1000 Pitches pitch viewer{% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1 style="text-align: center;">{{ count }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    {% for pitch in pitches %}
+      <div class="col-md-2 pitch-item">
+        <a href="{{ pitch.video_url }}">
+          {{ pitch.pitch_title }}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

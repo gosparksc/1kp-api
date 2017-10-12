@@ -1,0 +1,51 @@
+{% import 'macros/flash.html' as flash with context %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="{% block meta_description %}{% endblock %}">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/main.css') }}">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="{{ url_for('web_blueprint.index') }}">
+            <img src="{{ url_for('static', filename='images/snake-eyes.jpg') }}"
+                 class="img-responsive"
+                 width="229" height="50" title="1000 Pitches" alt="1000 Pitches"/>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      {{ flash.render() }}
+
+      <div class="md-margin-top">{% block heading %}{% endblock %}</div>
+      {% block body %}{% endblock %}
+    </main>
+
+    <footer class="footer text-center">
+      <div class="container">
+        <ul class="list-inline">
+          <li class="text-muted">1000 Pitches 2017</li>
+        </ul>
+      </div>
+    </footer>
+
+  </body>
+</html>
