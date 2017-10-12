@@ -13,24 +13,25 @@
 
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/main.css') }}">
 
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="{{ url_for('web_blueprint.index') }}">
-            <img src="{{ url_for('static', filename='images/snake-eyes.jpg') }}"
-                 class="img-responsive"
-                 width="229" height="50" title="1000 Pitches" alt="1000 Pitches"/>
-          </a>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+        <a class="navbar-brand" href="{{ url_for('web_blueprint.index') }}">
+          <img src="{{ url_for('static', filename='images/snake-eyes.jpg') }}"
+               class="img-responsive"
+               width="229" height="50" title="1000 Pitches" alt="1000 Pitches"/>
+        </a>
+        <div class="form-inline">
+          <h3 style="margin-bottom: 0px;">{{ count }}</h3>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
 
     <main class="container">
       {{ flash.render() }}
@@ -42,7 +43,7 @@
     <footer class="footer text-center">
       <div class="container">
         <ul class="list-inline">
-          <li class="text-muted">1000 Pitches 2017</li>
+          <li class="text-muted">1000 Pitches &copy; 2017</li>
         </ul>
       </div>
     </footer>

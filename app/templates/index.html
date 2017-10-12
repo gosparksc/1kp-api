@@ -5,15 +5,11 @@
 
 {% block body %}
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <h1 style="text-align: center;">{{ count }}</h1>
-    </div>
-  </div>
-  <div class="row">
     {% for pitch in pitches %}
-      <div class="col-md-2 pitch-item">
-        <a href="{{ pitch.video_url }}">
-          {{ pitch.pitch_title }}
+      <div class="col-md-3">
+        <a href="{{ pitch.video_url }}" class="pitch-item">
+          <b>{{ pitch.pitch_title }}</b><br>
+          {{ pitch.pitch_category }}
         </a>
       </div>
     {% endfor %}

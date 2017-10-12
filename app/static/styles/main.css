@@ -67,5 +67,12 @@ label {
 }
 
 .pitch-item {
-  height: 100px;
+  height: 150px;
+  padding: 0.75em 1em;
+  display: block;
+  width: 100%;
+}
+
+.pitch-item:hover {
+  background-color: #ddd;
 }
