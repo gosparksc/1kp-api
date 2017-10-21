@@ -18,14 +18,16 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/main.css') }}">
 
+    {% block headext %}{% endblock %}
+
   </head>
   <body>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
         <a class="navbar-brand" href="{{ url_for('web_blueprint.index') }}">
-          <img src="{{ url_for('static', filename='images/snake-eyes.jpg') }}"
+          <img src="{{ url_for('static', filename='img/logo.png') }}"
                class="img-responsive"
-               width="229" height="50" title="1000 Pitches" alt="1000 Pitches"/>
+               width="110" height="50" title="1000 Pitches" alt="1000 Pitches"/>
         </a>
         <div class="form-inline">
           <h3 style="margin-bottom: 0px;">{{ count }}</h3>

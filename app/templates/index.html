@@ -7,7 +7,7 @@
   <div class="row">
     {% for pitch in pitches %}
       <div class="col-md-3">
-        <a href="{{ pitch.video_url }}" class="pitch-item">
+        <a href="{{ url_for('web_blueprint.v', video_id=pitch.id) }}" class="pitch-item">
           <b>{{ pitch.pitch_title }}</b><br>
           {{ pitch.pitch_category }}
         </a>

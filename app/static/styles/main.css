@@ -76,3 +76,10 @@ label {
 .pitch-item:hover {
   background-color: #ddd;
 }
+
+#video-portal {
+  width: 555;
+  max-width: 100%;
+  max-height: 740;
+  max-height: 133.33vw;
+}
