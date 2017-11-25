@@ -1,0 +1,54 @@
+{% import 'macros/flash.html' as flash with context %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="{% block meta_description %}{% endblock %}">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/main.css') }}">
+
+    {% block headext %}{% endblock %}
+
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+        <a class="navbar-brand" href="{{ url_for('web_blueprint.index') }}">
+          <img src="{{ url_for('static', filename='img/logo.png') }}"
+               class="img-responsive"
+               width="110" height="50" title="1000 Pitches" alt="1000 Pitches"/>
+        </a>
+        <div class="form-inline">
+          <h3 style="margin-bottom: 0px;">{{ count }}</h3>
+        </div>
+      </nav>
+    </div>
+
+    <main class="container">
+      {{ flash.render() }}
+
+      <div class="md-margin-top">{% block heading %}{% endblock %}</div>
+      {% block body %}{% endblock %}
+    </main>
+
+    <footer class="footer text-center">
+      <div class="container">
+        <ul class="list-inline">
+          <li class="text-muted">1000 Pitches &copy; 2017</li>
+        </ul>
+      </div>
+    </footer>
+
+  </body>
+</html>

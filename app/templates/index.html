@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}View Pitches{% endblock %}
+{% block meta_description %}1000 Pitches pitch viewer{% endblock %}
+
+{% block body %}
+  {% if category %}
+    <div class="row">
+      <h2 class="category-title">{{ category }}<h2>
+    </div>
+  {% endif %}
+  <div class="row">
+    {% for pitch in pitches %}
+      <div class="col-md-3">
+        <a href="{{ url_for('web_blueprint.v', video_id=pitch.id) }}" class="pitch-item">
+          <b>{{ pitch.pitch_title }}</b><br>
+          {{ pitch.pitch_category }}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

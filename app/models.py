@@ -6,7 +6,7 @@ import wtforms_json
 from sqlalchemy import not_, func
 from sqlalchemy.dialects.postgresql import UUID
 from wtforms import Form
-from wtforms.fields import FormField, FieldList, StringField, SelectField
+from wtforms.fields import FormField, FieldList, StringField, SelectField, BooleanField
 from wtforms.validators import Length, Required
 
 from flask import current_app as app
@@ -306,6 +306,7 @@ class Pitch(Model):
 
     # Facebook
     fb_posted = db.Column(db.Boolean, default=False)
+    should_post_fb = db.Column(db.Boolean, default=True)
 
 
 class PitchForm(Form):
@@ -317,8 +318,10 @@ class PitchForm(Form):
     grad_year = StringField(validators=[Length(max=4), Required()])
 
     pitch_title = StringField(validators=[Length(max=250), Required()])
-    pitch_category = SelectField(validators=[Required()], choices=[('Art & Performance', 'Art & Performance'), ('Media & Entertainment', 'Media & Entertainment'), ('USC Community', 'USC Community'), ('Health & Biotech', 'Health & Biotech'), ('Fintech & Commerce', 'Fintech & Commerce'), ('Education', 'Education'), ('Environment', 'Environment'), ('Social & Lifestyle', 'Social & Lifestyle'), ('Services', 'Services'), ('Small Business', 'Small Business')])
+    pitch_category = SelectField(validators=[Required()], choices=[('Arts, Media & Culture', 'Arts, Media & Culture'), ('Community Impact & Education', 'Community Impact & Education'), ('Environment', 'Environment'), ('Health & Biotech', 'Health & Biotech'), ('Life Hacks & Other', 'Life Hacks & Other'), ('Politics', 'Politics')])
     pitch_short_description = StringField(validators=[Length(max=5000), Required()])
+
+    should_post_fb = BooleanField()
 
     video_url = StringField(validators=[Required()])
 

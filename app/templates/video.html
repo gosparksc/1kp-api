@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}View Pitches{% endblock %}
+{% block meta_description %}1000 Pitches pitch viewer{% endblock %}
+{% block headext %}
+  <link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+
+  <!-- If you'd like to support IE8 -->
+  <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+      <div class="col-xl-6 col-lg-7" style="margin-bottom: 20px">
+        <video id="video-portal" class="video-js vjs-big-play-centered" controls preload="auto"
+      poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+          <source src="{{ pitch.video_url }}" type='video/mp4'>
+          <!-- <source src="MY_VIDEO.webm" type='video/webm'> -->
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser that
+            <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+        </video>
+      </div>
+      <div class="col-xl-6 col-lg-5">
+        <div class="container">
+          <div class="row">
+            <p><a href="{{ url_for('web_blueprint.c', category_id=category_url) }}" class="text-primary" style="text-transform: uppercase;">{{ pitch.pitch_category }}</a></p>
+          </div>
+          <div class="row">
+            <h2>{{ pitch.pitch_title }}</h2>
+          </div>
+          <div class="row">
+            <p>{{ pitch.pitch_short_description }}</p>
+          </div>
+          <div class="row">
+            <a class="btn btn-outline-primary" href="{{ pitch.video_url }}" role="button">Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+{% endblock %}

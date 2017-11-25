@@ -59,6 +59,7 @@ def test_pitch_posting(app, client):
             'pitch_title': 'My Dope Pitch',
             'pitch_category': 'Environment',
             'pitch_short_description': 'Yo this is a dope pitch',
+            'should_post_fb': True,
             'video_url':'http://gofuckaduck.com'
         }, 200, 0),
         ({
@@ -70,6 +71,7 @@ def test_pitch_posting(app, client):
             'pitch_title': 'My Dope Pitch',
             'pitch_category': 'Environment',
             'pitch_short_description': 'Yo this is a dope pitch',
+            'should_post_fb': False,
             'video_url':'notindb'
         }, 400, 3),
     ]
@@ -105,6 +107,7 @@ def test_device_id_setting(app, client):
         'pitch_title': 'My Dope Pitch',
         'pitch_category': 'Environment',
         'pitch_short_description': 'Yo this is a dope pitch',
+        'should_post_fb': True,
         'video_url':'http://gofuckaduck.com'
     }
 
@@ -130,7 +133,7 @@ def test_pitch_view(app, client):
     v = Video(url='http://gofuckaduck.com')
     db.session.add(v)
 
-    pitch_data = {
+    {
         'first_name':'Brian',
         'last_name':'Anglin',
         'email':'banglin@usc.edu',
@@ -140,6 +143,7 @@ def test_pitch_view(app, client):
         'pitch_title': 'My Dope Pitch',
         'pitch_category': 'Environment',
         'pitch_short_description': 'Yo this is a dope pitch',
+        'should_post_fb': True,
         'video_url':'http://gofuckaduck.com'
     }
 
@@ -165,4 +169,3 @@ def test_pitch_view(app, client):
     resp, status_code = client.get('/api/pitch-download', query_string={'filter-dl':'1'})
     assert status_code == 200
     assert len(resp['pitches']) == 0
-

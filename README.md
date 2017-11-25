@@ -1,22 +1,23 @@
 1kp API
 ===
 
-API to setup uplaoding of posts.
+API to setup uploading of posts.
 
 
 ###Setup
 
-    virtualenv env
+    virtualenv -p python3 env
     source env/bin/activate
     pip install -r requirements.txt
     // Start Postgres
     createdb onekp
-    python mananage.py setup
+    python3 manage.py setup
     createdb onekptesting
 
 ###Running
 
-    python wsgi.py
+    source env/bin/activate
+    python3 wsgi.py
 
 
 ### Accessing The Server
