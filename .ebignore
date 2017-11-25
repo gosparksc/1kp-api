@@ -1,0 +1,13 @@
+__pycache__
+.cache
+*.pyc
+*.DS_Store
+env
+.git/
+
+
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
