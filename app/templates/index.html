@@ -4,6 +4,11 @@
 {% block meta_description %}1000 Pitches pitch viewer{% endblock %}
 
 {% block body %}
+  {% if category %}
+    <div class="row">
+      <h2 class="category-title">{{ category }}<h2>
+    </div>
+  {% endif %}
   <div class="row">
     {% for pitch in pitches %}
       <div class="col-md-3">

@@ -25,7 +25,7 @@
       <div class="col-xl-6 col-lg-5">
         <div class="container">
           <div class="row">
-            <p class="text-primary" style="text-transform: uppercase;">{{ pitch.pitch_category }}</p>
+            <p><a href="{{ url_for('web_blueprint.c', category_id=category_url) }}" class="text-primary" style="text-transform: uppercase;">{{ pitch.pitch_category }}</a></p>
           </div>
           <div class="row">
             <h2>{{ pitch.pitch_title }}</h2>

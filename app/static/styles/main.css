@@ -77,6 +77,11 @@ label {
   background-color: #ddd;
 }
 
+.category-title {
+  display: block;
+  padding: 0 1em 0.5em;
+}
+
 #video-portal {
   width: 555;
   max-width: 100%;
