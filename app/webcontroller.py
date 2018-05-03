@@ -14,14 +14,14 @@ category_to_url_map = {'Arts, Media & Culture': 'arts',
 
 @web_blueprint.route('/', methods=['GET'])
 def index():
-    count = Pitch.query.count() - 13  # Temporary to get the accurate count
+    count = Pitch.query.count()
     pitches = Pitch.query.all()
     return render_template('index.html', count=count, pitches=pitches)
 
 
 @web_blueprint.route('/v/<int:video_id>', methods=['GET'])
 def v(video_id):
-    count = Pitch.query.count() - 13  # Temporary to get the accurate count
+    count = Pitch.query.count()
     pitch = Pitch.query.filter_by(id=video_id).first()
     category_url = category_to_url_map[pitch.pitch_category]
     return render_template('video.html', count=count, pitch=pitch, category_url=category_url)
@@ -40,7 +40,7 @@ def c(category_id):
     if category is None:
         return abort(404)
 
-    count = Pitch.query.count() - 13  # Temporary to get the accurate count
+    count = Pitch.query.count()
     pitch = Pitch.query.filter_by(pitch_category=category).all()
     return render_template('index.html', count=count,
                            pitches=pitch, category=category)
